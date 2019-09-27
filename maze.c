@@ -34,7 +34,7 @@ void print_maze(char hor_l[11][9], char ver_l[12][8])
 
 	printf("+---+---+---+---+---+---+---+---+---+\n");
 
-	for (int plus_y = 0; plus_y < 11; plus_y++, y++)
+	for (y = 0; y < 11; y++)
 	{
 		//ver자리
 		printf("|");
@@ -50,15 +50,15 @@ void print_maze(char hor_l[11][9], char ver_l[12][8])
 		
 		//hor자리
 
-		printf("|");
-		for (int plus_x = 0, x = 0; plus_x < 9; plus_x++, x++)
+		printf("+");
+		for (int x = 0; x < 9; x++)
 		{
-			if (hor_l[y][x] != 0) //x는 0번부터 9번까지 검사
+			if (hor_l[y][x] != 0)
 				printf("---+");
 			else
 				printf("   +");
 		}
-		printf("  |\n");
+		printf("\n");
 	}
 	printf("+---+---+---+---+---+---+---+---+---+");
 }
