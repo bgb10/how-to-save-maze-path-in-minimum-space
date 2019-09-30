@@ -1,21 +1,21 @@
-// °úÁ¦ Á¶°Ç 1. ´Ù¸® 15°³ ÀÌ»ó 2. ¼¼·Î¼± »çÀÌ ÃÖ¼Ò 3°³ °¡·Î¼± ÇÊ¿ä 3. ¸ô¸®¸é X
+// ê³¼ì œ ì¡°ê±´ 1. ë‹¤ë¦¬ 15ê°œ ì´ìƒ 2. ì„¸ë¡œì„  ì‚¬ì´ ìµœì†Œ 3ê°œ ê°€ë¡œì„  í•„ìš” 3. ëª°ë¦¬ë©´ X
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#define DARI_NUM 18 // ³õÀ» ´Ù¸® °³¼ö (»ç´Ù¸® ÇÑ ¹ø ¸¸µé ¶§)
-#define Y_NUM 14 // ´Ù¸® »ı¼º °¡´É À§Ä¡ÀÇ YÃà ±æÀÌ (XÃàÀº »ç¶÷ ¼ö - 1) 
-#define PEOPLE 5 // »ç¶÷ ¼ö 
-#define NUM_MAX 5 // (int)((DARI_NUM - 3) % (PEOPLE - 2)) // »çÀÌ»çÀÌ 4Ä­ Áß ÇÑ Ä­ »©°í ´Ù ÃÖ´ë °¡·Î¼±ÀÌ °É¸®´õ¶óµµ, ³²Àº ÇÑ Ä­¿¡°Ô ÃÖ¼Ò 3°³ °¡·Î¼± º¸Àå
+#define DARI_NUM 18 // ë†“ì„ ë‹¤ë¦¬ ê°œìˆ˜ (ì‚¬ë‹¤ë¦¬ í•œ ë²ˆ ë§Œë“¤ ë•Œ)
+#define Y_NUM 14 // ë‹¤ë¦¬ ìƒì„± ê°€ëŠ¥ ìœ„ì¹˜ì˜ Yì¶• ê¸¸ì´ (Xì¶•ì€ ì‚¬ëŒ ìˆ˜ - 1) 
+#define PEOPLE 5 // ì‚¬ëŒ ìˆ˜ 
+#define NUM_MAX 5 // (int)((DARI_NUM - 3) % (PEOPLE - 2)) // ì‚¬ì´ì‚¬ì´ 4ì¹¸ ì¤‘ í•œ ì¹¸ ë¹¼ê³  ë‹¤ ìµœëŒ€ ê°€ë¡œì„ ì´ ê±¸ë¦¬ë”ë¼ë„, ë‚¨ì€ í•œ ì¹¸ì—ê²Œ ìµœì†Œ 3ê°œ ê°€ë¡œì„  ë³´ì¥
 #define SERIES_MAX 3
 
-void mkdari(int **arr); // ·£´ıÀ¸·Î ´Ù¸® »ı¼ºÇÏ´Â ÇÔ¼ö
-void printdari(int **arr); // »ç´Ù¸® Ãâ·ÂÇÏ´Â ÇÔ¼ö
-void result(int **arr); // »ç´Ù¸® °á°ú °è»êÇÏ°í Ãâ·Â, ÀúÀåÇÏ´Â ÇÔ¼ö
-void clean(int **arr); // À§ÀÇ ¼¼ °³ ÇÔ¼ö µ¹¸± ¶§ »ç¿ëÇÑ ´Ù¸® ÀúÀå ¹è¿­ ÃÊ±âÈ­ÇÏ´Â ÇÔ¼ö
+void mkdari(int **arr); // ëœë¤ìœ¼ë¡œ ë‹¤ë¦¬ ìƒì„±í•˜ëŠ” í•¨ìˆ˜
+void printdari(int **arr); // ì‚¬ë‹¤ë¦¬ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
+void result(int **arr); // ì‚¬ë‹¤ë¦¬ ê²°ê³¼ ê³„ì‚°í•˜ê³  ì¶œë ¥, ì €ì¥í•˜ëŠ” í•¨ìˆ˜
+void clean(int **arr); // ìœ„ì˜ ì„¸ ê°œ í•¨ìˆ˜ ëŒë¦´ ë•Œ ì‚¬ìš©í•œ ë‹¤ë¦¬ ì €ì¥ ë°°ì—´ ì´ˆê¸°í™”í•˜ëŠ” í•¨ìˆ˜
 
 int main() {
 	int i, j;
-	int **dari; // ´Ù¸® ¾îµğ¿¡ ³õÀ»Áö ÀúÀåÇÒ ÀÌÂ÷¿ø ¹è¿­ µ¿ÀûÇÒ´ç¿¡ ÀÌ¿ë
+	int **dari; // ë‹¤ë¦¬ ì–´ë””ì— ë†“ì„ì§€ ì €ì¥í•  ì´ì°¨ì› ë°°ì—´ ë™ì í• ë‹¹ì— ì´ìš©
 	srand(time(NULL)); 
 
 	dari = (int**)calloc(sizeof(int*), Y_NUM);
@@ -40,33 +40,33 @@ int main() {
 
 void mkdari(int **arr) {
 	int i, j, k, comparison;
-	int select_x, select_y; // »ç´Ù¸® À§Ä¡ÀÇ X, YÁÂÇ¥ ÀúÀåÇÒ º¯¼ö, (0, 0) ~ (Y_NUM - 1, PEOPLE - 2)
+	int select_x, select_y; // ì‚¬ë‹¤ë¦¬ ìœ„ì¹˜ì˜ X, Yì¢Œí‘œ ì €ì¥í•  ë³€ìˆ˜, (0, 0) ~ (Y_NUM - 1, PEOPLE - 2)
 	
 	for (i = 0; i < DARI_NUM; i++) {
 		do {
 			do {
 				select_x = (rand() % (PEOPLE - 1));
 				select_y = (rand() % Y_NUM);
-			} while (arr[select_y][select_x] != 0); // Áßº¹ ¹æÁö (´Ù¸® °³¼ö ´Ã 18°³ À¯Áö)
+			} while (arr[select_y][select_x] != 0); // ì¤‘ë³µ ë°©ì§€ (ë‹¤ë¦¬ ê°œìˆ˜ ëŠ˜ 18ê°œ ìœ ì§€)
 
-			if (select_x == 0) { // XÁÂÇ¥ 0ÀÏ ¶§, ¿À¸¥ÂÊ ´Ù¸® À¯¹«¸¸ °í·ÁÇÏ¸é µÊ
+			if (select_x == 0) { // Xì¢Œí‘œ 0ì¼ ë•Œ, ì˜¤ë¥¸ìª½ ë‹¤ë¦¬ ìœ ë¬´ë§Œ ê³ ë ¤í•˜ë©´ ë¨
 				if (arr[select_y][select_x + 1] != 1) {
 					arr[select_y][select_x] = 1;
 				}
 			}
-			else if (select_x == PEOPLE - 2) { // XÁÂÇ¥ PEOPLE - 2ÀÏ ¶§, ¿ŞÂÊ ´Ù¸® À¯¹«¸¸ °í·ÁÇÏ¸é µÊ
+			else if (select_x == PEOPLE - 2) { // Xì¢Œí‘œ PEOPLE - 2ì¼ ë•Œ, ì™¼ìª½ ë‹¤ë¦¬ ìœ ë¬´ë§Œ ê³ ë ¤í•˜ë©´ ë¨
 				if (arr[select_y][select_x - 1] != 1) { 
 					arr[select_y][select_x] = 1;
 				}
 			}
-			else { // XÁÂÇ¥°¡ À§ÀÇ °æ¿ì°¡ ¾Æ´Ò ¶§, µÑ ´Ù °í·ÁÇØ¾ß ÇÔ
+			else { // Xì¢Œí‘œê°€ ìœ„ì˜ ê²½ìš°ê°€ ì•„ë‹ ë•Œ, ë‘˜ ë‹¤ ê³ ë ¤í•´ì•¼ í•¨
 				if ((arr[select_y][select_x + 1] != 1) && (arr[select_y][select_x - 1] != 1)) {
 					arr[select_y][select_x] = 1;
 				}
 			}
 
 			comparison = 0;
-			for (j = 0; j < Y_NUM; j++) { // ÇÑ ´Ù¸®¿¡ ¿Ã ¼ö ÀÖ´Â ÃÖ´ë °³¼ö ÆÇ´Ü
+			for (j = 0; j < Y_NUM; j++) { // í•œ ë‹¤ë¦¬ì— ì˜¬ ìˆ˜ ìˆëŠ” ìµœëŒ€ ê°œìˆ˜ íŒë‹¨
 				if (arr[j][select_x] == 1) {
 					comparison++;
 				}
@@ -75,7 +75,7 @@ void mkdari(int **arr) {
 				arr[select_y][select_x] = 0;
 			}
 
-			for (j = 0; j < SERIES_MAX; j++) { // ¿¬¼Ó¼º ÆÇ´Ü (ÃÖ´ë 3°³±îÁö¸¸ ¿¬¼ÓÀ¸·Î ´Ù¸® ¿Ã ¼ö ÀÖÀ½)
+			for (j = 0; j < SERIES_MAX; j++) { // ì—°ì†ì„± íŒë‹¨ (ìµœëŒ€ 3ê°œê¹Œì§€ë§Œ ì—°ì†ìœ¼ë¡œ ë‹¤ë¦¬ ì˜¬ ìˆ˜ ìˆìŒ)
 				comparison = 0;
 				if ((select_y - 2 + j >= 0) && (select_y + j < Y_NUM)) {
 					for (k = j; k < j + SERIES_MAX; k++) {
@@ -89,19 +89,38 @@ void mkdari(int **arr) {
 					}
 				}
 			}
+
+			/* comparison = 0; //ë§Œë“œëŠ” ì¤‘
+			for (j = 0; j < Y_NUM; j++) {
+				if (arr[j][select_x] == 1) {
+					for (k = j; k < Y_NUM; k++){
+						comparison++;
+						if ((select_x != 0) && (arr[])) {
+							comparison--;
+						}		
+						if ((select_x != PEOPLE - 2) && ()) {
+							comparison--;
+						}
+						if (comparison > SERIES_MAX) {
+							arr[select_y][select_x] = 0;
+						}
+					}
+					break;
+				}			
+			} */
+
 		} while (arr[select_y][select_x] == 0);
 	}
 }
 
 void printdari(int **arr) {
 	int i, j;
-	printf("A          B          C          D          E\n"); 
+	printf("A          B          C          D          E\n|          |          |          |          |\n"); 
 	for (i = 0; i < Y_NUM; i++) {
-		printf("|          |          |          |          |\n"); 
-		for (j = 0; j < PEOPLE - 1; j++) { // À§¿¡ 0, 1·Î Ç¥½ÃÇÑ ´Ù¸® À¯¹« Ãâ·Â
-			if (arr[i][j] == 0) // ´Ù¸® ÀúÀå ¾È µÇ¾î ÀÖÀ» ¶§ (== 0)
+		for (j = 0; j < PEOPLE - 1; j++) { // ìœ„ì— 0, 1ë¡œ í‘œì‹œí•œ ë‹¤ë¦¬ ìœ ë¬´ ì¶œë ¥
+			if (arr[i][j] == 0) // ë‹¤ë¦¬ ì €ì¥ ì•ˆ ë˜ì–´ ìˆì„ ë•Œ (== 0)
 				printf("|          ");
-			else // ´Ù¸® ÀúÀåµÇ¾î ÀÖÀ» ¶§ (== 1)
+			else // ë‹¤ë¦¬ ì €ì¥ë˜ì–´ ìˆì„ ë•Œ (== 1)
 				printf("|----------");		
 		}
 		printf("|\n");
@@ -110,14 +129,14 @@ void printdari(int **arr) {
 }
 
 void result(int **arr) {
-	static int count[PEOPLE][PEOPLE] = { 0 }; // staticÀ¸·Î ÀúÀå, ¿©·¯ ¹ø ºÒ·¯µµ °ª ÃÊ±âÈ­ ¾È µÇµµ·Ï (100¹ø Åë°è À§ÇÔ)
-	// count[½ÃÀÛ(¾ËÆÄºª)][°á°ú(¼ıÀÚ)]
-	int i, j, temp; // temp´Â »ç´Ù¸® ³»·Á°¡¸ç À§Ä¡ ÀúÀåÇØµÎ´Â º¯¼ö, A¿Í °°Àº ÁÙÀÌ 0, E¿Í °°Àº ÁÙÀÌ 4
+	static int count[PEOPLE][PEOPLE] = { 0 }; // staticìœ¼ë¡œ ì €ì¥, ì—¬ëŸ¬ ë²ˆ ë¶ˆëŸ¬ë„ ê°’ ì´ˆê¸°í™” ì•ˆ ë˜ë„ë¡ (100ë²ˆ í†µê³„ ìœ„í•¨)
+	// count[ì‹œì‘(ì•ŒíŒŒë²³)][ê²°ê³¼(ìˆ«ì)]
+	int i, j, temp; // tempëŠ” ì‚¬ë‹¤ë¦¬ ë‚´ë ¤ê°€ë©° ìœ„ì¹˜ ì €ì¥í•´ë‘ëŠ” ë³€ìˆ˜, Aì™€ ê°™ì€ ì¤„ì´ 0, Eì™€ ê°™ì€ ì¤„ì´ 4
 	for (i = 0; i < PEOPLE; i++) {
-		temp = i; // AºÎÅÍ »ç´Ù¸® Å¸±â ½ÃÀÛ
-		for (j = 0; j < Y_NUM; j++) { // ¾ËÆÄºª¿¡¼­ºÎÅÍ Á¡Á¡ ³»·Á¿À¸ç(j), ¾çÂÊ(È¤Àº ÇÑÂÊ)ÀÇ ´Ù¸® À¯¹« È®ÀÎ
+		temp = i; // Aë¶€í„° ì‚¬ë‹¤ë¦¬ íƒ€ê¸° ì‹œì‘
+		for (j = 0; j < Y_NUM; j++) { // ì•ŒíŒŒë²³ì—ì„œë¶€í„° ì ì  ë‚´ë ¤ì˜¤ë©°(j), ì–‘ìª½(í˜¹ì€ í•œìª½)ì˜ ë‹¤ë¦¬ ìœ ë¬´ í™•ì¸
 			if ((arr[j][temp] == 1) && (temp != PEOPLE - 1)) {
-				temp++; // tempÀÇ ¿À¸¥ÂÊ¿¡ »ç´Ù¸® ÀÖÀ½ ÇÑ Ä­ ¿À¸¥ÂÊ ÀÌµ¿
+				temp++; // tempì˜ ì˜¤ë¥¸ìª½ì— ì‚¬ë‹¤ë¦¬ ìˆìŒ í•œ ì¹¸ ì˜¤ë¥¸ìª½ ì´ë™
 			}
 			else if ((arr[j][temp - 1] == 1) && (temp != 0)) {
 				temp--; 
@@ -126,7 +145,7 @@ void result(int **arr) {
 		count[i][temp] = count[i][temp] + 1; 
 	}
 	for (i = 0; i < PEOPLE; i++) {
-		printf("%d¹ø : ", i + 1);
+		printf("%dë²ˆ : ", i + 1);
 		for(j = 0; j < PEOPLE; j++){
 			printf("%c(%d) ", 'A' + j, count[j][i]);
 		}
@@ -139,7 +158,7 @@ void clean(int **arr) {
 	int i, j;
 	for (i = 0; i < Y_NUM; i++) {
 		for (j = 0; j < PEOPLE - 1; j++) {
-			arr[i][j] = 0; // ¹è¿­ ¸ğµç Ä­ ÃÊ±âÈ­
+			arr[i][j] = 0; // ë°°ì—´ ëª¨ë“  ì¹¸ ì´ˆê¸°í™”
 		}
 	}
-}
+} 
