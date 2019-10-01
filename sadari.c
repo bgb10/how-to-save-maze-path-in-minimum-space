@@ -76,7 +76,8 @@ void mkdari(int **arr) {
 				arr[select_y][select_x] = 0;
 			}
 
-			for (j = 0; j < SERIES_MAX; j++) { // 연속성 판단 (최대 2개까지만 다닥다닥 다리 올 수 있음)
+			for (j = 0; j < SERIES_MAX; j++) { // 연속성 판단 (다닥다닥 다리 올 수 없음)
+			// 이 함수를 통해 다닥다닥 오는 개수를 변경 가능
 				comparison = 0;
 				if ((select_y - (SERIES_MAX - 1) + j >= 0) && (select_y + j < Y_NUM)) {
 					for (k = j; k < j + SERIES_MAX; k++) {
