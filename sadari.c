@@ -6,7 +6,7 @@
 #define Y_NUM 16 // 다리 생성 가능 위치의 Y축 길이 (X축은 사람 수 - 1) 
 #define PEOPLE 5 // 사람 수 
 #define NUM_MAX 5 // (int)((DARI_NUM - 3) % (PEOPLE - 2)) // 사이사이 4칸 중 한 칸 빼고 다 최대 가로선이 걸리더라도, 남은 한 칸에게 최소 3개 가로선 보장
-#define SERIES_MAX 2 // 연속으로 올 수 있는 최대 개수, 다닥다닥 붙어 있는 일 방지
+#define SERIES_MAX 2 // 다리가 같은 줄에 다닥다닥 붙어 있는 일 방지, 연속으로 오는 것 불가능
 #define SERIES_MAX_2 3 // 경향이 몰려 있는 것 방지
 
 void mkdari(int **arr); // 랜덤으로 다리 생성하는 함수
@@ -78,9 +78,9 @@ void mkdari(int **arr) {
 
 			for (j = 0; j < SERIES_MAX; j++) { // 연속성 판단 (최대 2개까지만 다닥다닥 다리 올 수 있음)
 				comparison = 0;
-				if ((select_y - 2 + j >= 0) && (select_y + j < Y_NUM)) {
+				if ((select_y - (SERIES_MAX - 1) + j >= 0) && (select_y + j < Y_NUM)) {
 					for (k = j; k < j + SERIES_MAX; k++) {
-						if (arr[select_y - 2 + k][select_x] == 1) {
+						if (arr[select_y - (SERIES_MAX - 1) + k][select_x] == 1) {
 							comparison++;
 						} 	
 					}
@@ -131,8 +131,8 @@ void printdari(int **arr) {
 }
 
 void result(int **arr) {
-	static int count[PEOPLE][PEOPLE] = { 0 }; // static으로 저장, 여러 번 불러도 값 초기화 안 되도록 (100번 통계 위함)
-	// count[시작(알파벳)][결과(숫자)]
+	static int count[PEOPLE][PEOPLE + 1] = { 0 }; // static으로 저장, 여러 번 불러도 값 초기화 안 되도록 (100번 통계 위함)
+	// count[시작(알파벳)][결과(숫자)], 결과 쪽 마지막 배열에는 각 결과 더한 값 저장
 	int i, j, temp; // temp는 사다리 내려가며 위치 저장해두는 변수, A와 같은 줄이 0, E와 같은 줄이 4
 	for (i = 0; i < PEOPLE; i++) {
 		temp = i; // A부터 사다리 타기 시작
@@ -144,16 +144,17 @@ void result(int **arr) {
 				temp--; 
 			}
 		}
-		count[i][temp] = count[i][temp] + 1; 
+		count[i][temp] = count[i][temp] + 1; // i는 abcde, temp는 12345 결정
 	}
 	for (i = 0; i < PEOPLE; i++) {
-		printf("%d번 : ", i + 1);
+		printf("%d : ", i + 1);
 		for(j = 0; j < PEOPLE; j++){
 			printf("%c(%d) ", 'A' + j, count[j][i]);
 		}
-		printf("\n");
+		count[i][PEOPLE]++;
+		printf("\t: %d\n", count[i][PEOPLE]);
 	}
-	printf("\n");
+	printf("\n"); 
 }
 
 void clean(int **arr) {
