@@ -10,7 +10,7 @@ print_maze() : 미로 데이터를 기반으로 미로를 출력합니다.
 	- digit_ver, digit_hor : 자릿수를 저장합니다.
 */
 
-void print_maze(unsigned char ver[], unsigned short hor[]);
+void print_maze(unsigned short hor[11], unsigned char ver[12]);
 
 int main()
 {
