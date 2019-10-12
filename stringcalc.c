@@ -268,32 +268,37 @@ void multiply(char *X, char *Y, int opt, int wBig, int len_X, int len_Y)
 	int round = 0;
 	int trig = 0;
 
-	for (int i = 1; i <= len_Y + 1; i++)
+	for (int i = 1; i <= 40; i++)
 	{
-		for (int j = 1; j <= len_X + 1; j++)
+		for (int j = 1; j <= 40; j++)
 		{
 			b_round = f_round;
-			f_round = (X[42 - j - i] * Y[41 - i]) / 10;
-			part[82 - j - i] = ((X[42 - j - i] * Y[41 - i]) % 10 + b_round) % 10;
-			if (((X[42 - j - i] * Y[41 - i]) % 10 + b_round)/10) f_round++;// 올림수를 1 더 더해주는 경우
+			f_round = (X[41 - j] * Y[41 - i]) / 10;
+			part[82 - j - i] = ((X[41 - j] * Y[41 - i]) % 10 + b_round) % 10;
+			if (((X[41 - j] * Y[41 - i]) % 10 + b_round)/10) f_round++;// 올림수를 1 더 더해주는 경우
 		}
-		
 		{
-			if (answer[81 - i] + part[81 - i] + round >= 10)
+		//part완성, 이제 더하기
+
+		for (int p = 1; p < 81; p++)
+		{
+			if (answer[81 - p] + part[81 - p] + round >= 10)
 			{
-				answer[81 - i] = answer[81 - i] + part[81 - i] + round - 10; //줄여 주고
+				answer[81 - p] = answer[81 - p] + part[81 - p] + round - 10; //줄여 주고
 				round = 1; // 올림수 증가
 			}
 			else
 			{
-				answer[81 - i] = answer[81 - i] + part[81 - i] + round; //대입하기
+				answer[81 - p] = answer[81 - p] + part[81 - p] + round; //대입하기
 				round = 0; //round 초기화
 			}
 		}
+		round = 0;
+		}
 
 		//part 초기화
-		for (int i = 0; i < 81; i++)
-			part[i] = 0;
+		for (int k = 0; k < 81; k++)
+			part[k] = 0;
 	}
 
 	//출력, 앞에서부터 0이 아니고 다른 숫자가 나오기 시작한다면 trig = 1, 끝까지 출력.
