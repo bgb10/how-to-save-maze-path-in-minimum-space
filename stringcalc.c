@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS //-0ÀÌ ¿Ö³ª¿ÀÁö...
 #include <stdio.h>
 #include <string.h>
 
@@ -35,6 +35,22 @@ int main()
 	//len_max´Â +1ÇØ¾ß ´Ù ´õÇØÁØ´Ù.
 
     opt = arrange(X, Y, len_X, len_Y); //¾ÖÃÊ¿¡ ºÎÈ£ ºÎºÐ°ú ¼ö ºÎºÐÀ» ³ª´²¼­ ÁÖÀÚ. ºÎÈ£¸¦ ¶¼°í opt(ºÎÈ£¿É¼Ç)¸¦ ¾ò°í, µÚ·Î ¹Ð¾î¹ö¸®±â.(Àý´ñ°ª)
+
+	//len Á¶Á¤(ºÎÈ£ °í·Á)
+	switch (opt)
+	{
+	case 1:
+		len_X--;
+		len_Y--;
+		break;
+	case 2:
+		len_X--;
+		break;
+	case 3:
+		len_Y--;
+		break;
+	}
+
     make_integer(X, Y); //ºñ±³°¡ ½±°Ô Á¤¼ö¸¦ ¸¸µé¾îÁÖ±â, ±¸¼º¿ä¼Ò´Â ¸ðµÎ Á¤¼ö
 	wBig = isBig(X, Y); //Ç×»ó X>Y·Î ¸¸µé¾îÁÖ±â(°è»ê °á°ú¸¸ Ç¥½ÃÇÏ¸é µÊ), wBig¿¡ ¹Ù²î¾ú´ÂÁö ¿©ºÎ¸¦ ÁÖ±â
 
@@ -71,7 +87,7 @@ void sum(char *X, char *Y, int opt, int wBig, int len_X, int len_Y) //answerÀ» ¾
 				round = 0; //round ÃÊ±âÈ­
 			}
 		}
-		printf("-");
+		if(wBig != 2) printf("-");
         break;
     case 2:
 		for (int i = 1; i <= len_max+1; i++)
@@ -136,6 +152,8 @@ void sum(char *X, char *Y, int opt, int wBig, int len_X, int len_Y) //answerÀ» ¾
 			trig = i;
 			break;
 		}
+		if (i == 80)
+			trig = 80;
 	}
 	for (int j = trig; j < 81; j++)
 	{
@@ -186,7 +204,7 @@ void subtraction(char *X, char *Y, int opt, int wBig, int len_X, int len_Y)
 				round = 0; //round ÃÊ±âÈ­
 			}
 		}
-		printf("-");
+		if (wBig != 2) printf("-");
 		break;
 	case 3:
 		for (int i = 1; i <= len_max+1; i++)
@@ -213,7 +231,7 @@ void subtraction(char *X, char *Y, int opt, int wBig, int len_X, int len_Y)
 			}
 			else
 			{
-				answer[81 - i] = X[41 - i] + -Y[41 - i] + round; //´ëÀÔÇÏ±â
+				answer[81 - i] = X[41 - i] - Y[41 - i] + round; //´ëÀÔÇÏ±â
 				round = 0; //round ÃÊ±âÈ­
 			}
 		}
@@ -231,6 +249,8 @@ void subtraction(char *X, char *Y, int opt, int wBig, int len_X, int len_Y)
 			trig = i;
 			break;
 		}
+		if (i == 80)
+			trig = 80;
 	}
 	for (int j = trig; j < 81; j++)
 	{
@@ -242,20 +262,41 @@ void subtraction(char *X, char *Y, int opt, int wBig, int len_X, int len_Y)
 void multiply(char *X, char *Y, int opt, int wBig, int len_X, int len_Y)
 {
 	char answer[81] = { 0, }; //ºÎÈ£´Â µû·Î Ãâ·Â.
-	int round = 0; //¿Ã¸²¼ö
+	char part[81] = { 0, };
+	int b_round = 0; //Àü ¿Ã¸²¼ö
+	int f_round = 0; //ÈÄ ¿Ã¸²¼ö
+	int round = 0;
 	int trig = 0;
 
-	for (int i = 1; i <= len_Y; i++)
+	for (int i = 1; i <= len_Y + 1; i++)
 	{
-		for (int j = 1; j <= len_X; j++)
+		for (int j = 1; j <= len_X + 1; j++)
 		{
-			answer[81 - j - i] = ((X[41 - j - i] * Y[41 - j - i]) % 10 + round) % 10;
-			round = (X[41 - j - i] * Y[41 - j - i]) / 10;
-			if ((X[41 - j - i] * Y[41 - j - i]) % 10 + round / 10) round++;// ¿Ã¸²¼ö¸¦ 1 ´õ ´õÇØÁÖ´Â °æ¿ì
+			b_round = f_round;
+			f_round = (X[42 - j - i] * Y[41 - i]) / 10;
+			part[82 - j - i] = ((X[42 - j - i] * Y[41 - i]) % 10 + b_round) % 10;
+			if (((X[42 - j - i] * Y[41 - i]) % 10 + b_round)/10) f_round++;// ¿Ã¸²¼ö¸¦ 1 ´õ ´õÇØÁÖ´Â °æ¿ì
 		}
+		
+		{
+			if (answer[81 - i] + part[81 - i] + round >= 10)
+			{
+				answer[81 - i] = answer[81 - i] + part[81 - i] + round - 10; //ÁÙ¿© ÁÖ°í
+				round = 1; // ¿Ã¸²¼ö Áõ°¡
+			}
+			else
+			{
+				answer[81 - i] = answer[81 - i] + part[81 - i] + round; //´ëÀÔÇÏ±â
+				round = 0; //round ÃÊ±âÈ­
+			}
+		}
+
+		//part ÃÊ±âÈ­
+		for (int i = 0; i < 81; i++)
+			part[i] = 0;
 	}
 
-	//Ãâ·Â, ¾Õ¿¡¼­ºÎÅÍ 0ÀÌ ¾Æ´Ï°í ´Ù¸¥ ¼ýÀÚ°¡ ³ª¿À±â ½ÃÀÛÇÑ´Ù¸é trig ºÎÅÍ ³¡±îÁö Ãâ·Â.
+	//Ãâ·Â, ¾Õ¿¡¼­ºÎÅÍ 0ÀÌ ¾Æ´Ï°í ´Ù¸¥ ¼ýÀÚ°¡ ³ª¿À±â ½ÃÀÛÇÑ´Ù¸é trig = 1, ³¡±îÁö Ãâ·Â.
 	for (int i = 0; i < 81; i++)
 	{
 		if (answer[i] != 0)
@@ -263,8 +304,9 @@ void multiply(char *X, char *Y, int opt, int wBig, int len_X, int len_Y)
 			trig = i;
 			break;
 		}
+		if (i == 80)
+			trig = 80;
 	}
-
 	for (int j = trig; j < 81; j++)
 	{
 		printf("%d", answer[j]);
@@ -284,14 +326,29 @@ int arrange(char *s1, char *s2, int len_X, int len_Y) //ºÎÈ£ ¾ò±â(Àý´ñ°ª ¸¸µé¾îÁ
 
     for(int i = len_X - 1; i >= 0; i--)
     {
-        s1[41-flag] = s1[i];
+        s1[41 - flag] = s1[i];
+		s1[i] = 0;
         flag++;
     }
 
-    if(s1[41-len_X] == '-')
+    if(s1[41 - len_X] == '-')
     {
-        s1[41-len_X] = 0;
+        s1[41 - len_X] = 0;
     }
+
+	flag = 1;
+
+	for (int i = len_Y - 1; i >= 0; i--)
+	{
+		s2[41 - flag] = s2[i];
+		s2[i] = 0;
+		flag++;
+	}
+
+	if (s2[41 - len_Y] == '-')
+	{
+		s2[41 - len_Y] = 0;
+	}
 
 	return opt;
 }
@@ -320,10 +377,8 @@ int isBig(char *X, char *Y)
 		{
 			return 0;
 		}
-		else
-			continue;
 	}
-	return 0;
+	return 2; //¼ö°¡ °°´Ù
 }
 
 void swap(char *X, char *Y)
