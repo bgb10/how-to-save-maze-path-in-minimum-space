@@ -312,6 +312,7 @@ void multiply(char *X, char *Y, int opt, int wBig, int len_X, int len_Y)
 		if (i == 80)
 			trig = 80;
 	}
+	if (opt == 2 || opt == 3) printf("-");
 	for (int j = trig; j < 81; j++)
 	{
 		printf("%d", answer[j]);
