@@ -6,7 +6,7 @@
 
 void sum(char *X, char *Y, int opt, int wBig, int len_X, int len_Y);
 void subtraction(char *X, char *Y, int opt, int wBig, int len_X, int len_Y);
-void multiply(char *X, char *Y, int opt, int wBig, int len_X, int len_Y);
+void multiply(char *X, char *Y, int opt, int wBig, int len_X, int len_Y); //곱하기 에러난다. + 부호추가 부탁(부호 출력 안함)
 
 int arrange(char * s1, char * s2, int len_X, int len_Y);
 
@@ -268,9 +268,9 @@ void multiply(char *X, char *Y, int opt, int wBig, int len_X, int len_Y)
 	int round = 0;
 	int trig = 0;
 
-	for (int i = 1; i <= 40; i++)
+	for (int i = 1; i <= 41; i++) //경계 체크하기.
 	{
-		for (int j = 1; j <= 40; j++)
+		for (int j = 1; j <= 41; j++)
 		{
 			b_round = f_round;
 			f_round = (X[41 - j] * Y[41 - i]) / 10;
@@ -280,7 +280,7 @@ void multiply(char *X, char *Y, int opt, int wBig, int len_X, int len_Y)
 		{
 		//part완성, 이제 더하기
 
-		for (int p = 1; p < 81; p++)
+		for (int p = 1; p <= 81; p++) //범위는 0부터 80까지(올림수 고려)
 		{
 			if (answer[81 - p] + part[81 - p] + round >= 10)
 			{
