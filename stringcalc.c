@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS //-0이 왜나오지...
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <string.h>
 
@@ -64,7 +64,7 @@ int main()
 	return 0;
 }
 
-void sum(char *X, char *Y, int opt, int wBig, int len_X, int len_Y) //answer을 어떻게 할지...
+void sum(char *X, char *Y, int opt, int wBig, int len_X, int len_Y)
 {
     char answer[81] = {0,}; //부호는 따로 출력.
     int round = 0; //올림수
@@ -312,7 +312,7 @@ void multiply(char *X, char *Y, int opt, int wBig, int len_X, int len_Y)
 		if (i == 80)
 			trig = 80;
 	}
-	if (opt == 2 || opt == 3) printf("-");
+	if ((opt == 2 || opt == 3) && trig != 80) printf("-");
 	for (int j = trig; j < 81; j++)
 	{
 		printf("%d", answer[j]);
