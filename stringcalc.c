@@ -3,6 +3,7 @@
 #include <string.h>
 
 #define MAX(a, b) (((a) > (b)) ? (a) : (b));
+#define LENGTH 42
 
 void sum(char *X, char *Y, int opt, int wBig, int len_X, int len_Y);
 void subtraction(char *X, char *Y, int opt, int wBig, int len_X, int len_Y);
@@ -16,8 +17,8 @@ void swap(char *X, char *Y);
 
 int main()
 {
-	char X[41] = { 0, }; //다 0으로 차있어라.
-	char Y[41] = { 0, };
+	char X[42] = { 0, }; //다 0으로 차있어라.
+	char Y[42] = { 0, };
 	char output[81] = { 0, }; //앞을 0으로 하고, 0이 안나오는 시점부터 출력하면 된다.
 
 
@@ -76,30 +77,30 @@ void sum(char *X, char *Y, int opt, int wBig, int len_X, int len_Y)
 	case 1:
 		for (int i = 1; i <= len_max + 1; i++)
 		{
-			if (X[41 - i] + Y[41 - i] + round >= 10)
+			if (X[42 - i] + Y[42 - i] + round >= 10)
 			{
-				answer[81 - i] = X[41 - i] + Y[41 - i] + round - 10; //줄여 주고
+				answer[81 - i] = X[42 - i] + Y[42 - i] + round - 10; //줄여 주고
 				round = 1; // 올림수 증가
 			}
 			else
 			{
-				answer[81 - i] = X[41 - i] + Y[41 - i] + round; //대입하기
+				answer[81 - i] = X[42 - i] + Y[42 - i] + round; //대입하기
 				round = 0; //round 초기화
 			}
 		}
-		if (wBig != 2) printf("-"); //여기서 문제.
+		printf("-");
 		break;
 	case 2:
 		for (int i = 1; i <= len_max + 1; i++)
 		{
-			if (X[41 - i] - Y[41 - i] + round < 0) //자리수 연산 값이 음수면
+			if (X[42 - i] - Y[42 - i] + round < 0) //자리수 연산 값이 음수면
 			{
-				answer[81 - i] = X[41 - i] + 10 - Y[41 - i] + round; //줄여 주고
+				answer[81 - i] = X[42 - i] + 10 - Y[42 - i] + round; //줄여 주고
 				round = -1; // 내림수 발생
 			}
 			else
 			{
-				answer[81 - i] = X[41 - i] + -Y[41 - i] + round; //대입하기
+				answer[81 - i] = X[42 - i] + -Y[42 - i] + round; //대입하기
 				round = 0; //round 초기화
 			}
 		}
@@ -111,14 +112,14 @@ void sum(char *X, char *Y, int opt, int wBig, int len_X, int len_Y)
 	case 3:
 		for (int i = 1; i <= len_max + 1; i++)
 		{
-			if (X[41 - i] - Y[41 - i] + round < 0) //자리수 연산 값이 음수면
+			if (X[42 - i] - Y[42 - i] + round < 0) //자리수 연산 값이 음수면
 			{
-				answer[81 - i] = X[41 - i] + 10 - Y[41 - i] + round; //줄여 주고
+				answer[81 - i] = X[42 - i] + 10 - Y[42 - i] + round; //줄여 주고
 				round = -1; // 내림수 발생
 			}
 			else
 			{
-				answer[81 - i] = X[41 - i] + -Y[41 - i] + round; //대입하기
+				answer[81 - i] = X[42 - i] + -Y[42 - i] + round; //대입하기
 				round = 0; //round 초기화
 			}
 		}
@@ -130,14 +131,14 @@ void sum(char *X, char *Y, int opt, int wBig, int len_X, int len_Y)
 	case 4:
 		for (int i = 1; i <= len_max + 1; i++)
 		{
-			if (X[41 - i] + Y[41 - i] + round >= 10)
+			if (X[42 - i] + Y[42 - i] + round >= 10)
 			{
-				answer[81 - i] = X[41 - i] + Y[41 - i] + round - 10; //줄여 주고
+				answer[81 - i] = X[42 - i] + Y[42 - i] + round - 10; //줄여 주고
 				round = 1; // 올림수 증가
 			}
 			else
 			{
-				answer[81 - i] = X[41 - i] + Y[41 - i] + round; //대입하기
+				answer[81 - i] = X[42 - i] + Y[42 - i] + round; //대입하기
 				round = 0; //round 초기화
 			}
 		}
@@ -174,14 +175,14 @@ void subtraction(char *X, char *Y, int opt, int wBig, int len_X, int len_Y)
 	case 1:
 		for (int i = 1; i <= len_max + 1; i++)
 		{
-			if (X[41 - i] - Y[41 - i] + round < 0) //자리수 연산 값이 음수면
+			if (X[42 - i] - Y[42 - i] + round < 0) //자리수 연산 값이 음수면
 			{
-				answer[81 - i] = X[41 - i] + 10 - Y[41 - i] + round; //줄여 주고
+				answer[81 - i] = X[42 - i] + 10 - Y[42 - i] + round; //줄여 주고
 				round = -1; // 내림수 발생
 			}
 			else
 			{
-				answer[81 - i] = X[41 - i] + -Y[41 - i] + round; //대입하기
+				answer[81 - i] = X[42 - i] + -Y[42 - i] + round; //대입하기
 				round = 0; //round 초기화
 			}
 		}
@@ -193,14 +194,14 @@ void subtraction(char *X, char *Y, int opt, int wBig, int len_X, int len_Y)
 	case 2:
 		for (int i = 1; i <= len_max + 1; i++)
 		{
-			if (X[41 - i] + Y[41 - i] + round >= 10)
+			if (X[42 - i] + Y[42 - i] + round >= 10)
 			{
-				answer[81 - i] = X[41 - i] + Y[41 - i] + round - 10; //줄여 주고
+				answer[81 - i] = X[42 - i] + Y[42 - i] + round - 10; //줄여 주고
 				round = 1; // 올림수 증가
 			}
 			else
 			{
-				answer[81 - i] = X[41 - i] + Y[41 - i] + round; //대입하기
+				answer[81 - i] = X[42 - i] + Y[42 - i] + round; //대입하기
 				round = 0; //round 초기화
 			}
 		}
@@ -209,14 +210,14 @@ void subtraction(char *X, char *Y, int opt, int wBig, int len_X, int len_Y)
 	case 3:
 		for (int i = 1; i <= len_max + 1; i++)
 		{
-			if (X[41 - i] + Y[41 - i] + round >= 10)
+			if (X[42 - i] + Y[42 - i] + round >= 10)
 			{
-				answer[81 - i] = X[41 - i] + Y[41 - i] + round - 10; //줄여 주고
+				answer[81 - i] = X[42 - i] + Y[42 - i] + round - 10; //줄여 주고
 				round = 1; // 올림수 증가
 			}
 			else
 			{
-				answer[81 - i] = X[41 - i] + Y[41 - i] + round; //대입하기
+				answer[81 - i] = X[42 - i] + Y[42 - i] + round; //대입하기
 				round = 0; //round 초기화
 			}
 		}
@@ -224,14 +225,14 @@ void subtraction(char *X, char *Y, int opt, int wBig, int len_X, int len_Y)
 	case 4:
 		for (int i = 1; i <= len_max + 1; i++)
 		{
-			if (X[41 - i] - Y[41 - i] + round < 0) //자리수 연산 값이 음수면
+			if (X[42 - i] - Y[42 - i] + round < 0) //자리수 연산 값이 음수면
 			{
-				answer[81 - i] = X[41 - i] + 10 - Y[41 - i] + round; //줄여 주고
+				answer[81 - i] = X[42 - i] + 10 - Y[42 - i] + round; //줄여 주고
 				round = -1; // 내림수 발생
 			}
 			else
 			{
-				answer[81 - i] = X[41 - i] - Y[41 - i] + round; //대입하기
+				answer[81 - i] = X[42 - i] - Y[42 - i] + round; //대입하기
 				round = 0; //round 초기화
 			}
 		}
@@ -261,35 +262,35 @@ void subtraction(char *X, char *Y, int opt, int wBig, int len_X, int len_Y)
 
 void multiply(char *X, char *Y, int opt, int wBig, int len_X, int len_Y)
 {
-	char answer[81] = { 0, }; //부호는 따로 출력.
-	char part[81] = { 0, };
+	char answer[90] = { 0, }; //부호는 따로 출력.
+	char part[90] = { 0, };
 	int b_round = 0; //전 올림수
 	int f_round = 0; //후 올림수
 	int round = 0;
 	int trig = 0;
 
-	for (int i = 1; i <= 41; i++) //경계 체크하기.
+	for (int i = 1; i <= 42; i++) //경계 체크하기.
 	{
-		for (int j = 1; j <= 41; j++)
+		for (int j = 1; j <= 42; j++)
 		{
 			b_round = f_round;
-			f_round = (X[41 - j] * Y[41 - i]) / 10;
-			part[82 - j - i] = ((X[41 - j] * Y[41 - i]) % 10 + b_round) % 10;
-			if (((X[41 - j] * Y[41 - i]) % 10 + b_round) / 10) f_round++;// 올림수를 1 더 더해주는 경우
+			f_round = (X[42 - j] * Y[42 - i]) / 10;
+			part[90 - j - i] = ((X[42 - j] * Y[42 - i]) % 10 + b_round) % 10; //88부터 박힘
+			if (((X[42 - j] * Y[42 - i]) % 10 + b_round) / 10) f_round++;// 올림수를 1 더 더해주는 경우
 		}
 		{
 			//part완성, 이제 더하기
 
-			for (int p = 1; p <= 81; p++) //범위는 0부터 80까지(올림수 고려)
+			for (int p = 1; p <= 90; p++) //범위는 0부터 90까지(넉넉)
 			{
-				if (answer[81 - p] + part[81 - p] + round >= 10)
+				if (answer[90 - p] + part[90 - p] + round >= 10)
 				{
-					answer[81 - p] = answer[81 - p] + part[81 - p] + round - 10; //줄여 주고
+					answer[90 - p] = answer[90 - p] + part[90 - p] + round - 10; //줄여 주고
 					round = 1; // 올림수 증가
 				}
 				else
 				{
-					answer[81 - p] = answer[81 - p] + part[81 - p] + round; //대입하기
+					answer[90 - p] = answer[90 - p] + part[90 - p] + round; //대입하기
 					round = 0; //round 초기화
 				}
 			}
@@ -297,25 +298,34 @@ void multiply(char *X, char *Y, int opt, int wBig, int len_X, int len_Y)
 		}
 
 		//part 초기화
-		for (int k = 0; k < 81; k++)
+		for (int k = 0; k < 90; k++)
 			part[k] = 0;
 	}
 
 	//출력, 앞에서부터 0이 아니고 다른 숫자가 나오기 시작한다면 trig = 1, 끝까지 출력.
-	for (int i = 0; i < 81; i++)
+	for (int i = 0; i < 90; i++)
 	{
 		if (answer[i] != 0)
 		{
 			trig = i;
 			break;
 		}
-		if (i == 80)
-			trig = 80;
+		if (i == 89)
+			trig = -1;
 	}
-	if ((opt == 2 || opt == 3) && trig != 80) printf("-");
-	for (int j = trig; j < 81; j++)
+
+	if ((opt == 2 || opt == 3) && trig != -1) printf("-");
+	
+	if (trig == -1)
 	{
-		printf("%d", answer[j]);
+		printf("0");
+	}
+	else
+	{
+		for (int j = trig; j <= 88; j++)
+		{
+			printf("%d", answer[j]);
+		}
 	}
 	printf("\n");
 }
@@ -323,37 +333,37 @@ void multiply(char *X, char *Y, int opt, int wBig, int len_X, int len_Y)
 int arrange(char *s1, char *s2, int len_X, int len_Y) //부호 얻기(절댓값 만들어주기), 수 뒤로 밀어주기.
 {
 	int opt;
-	int flag = 1;
+	int flag = 0;
 
 	if (s1[0] == '-' && s2[0] == '-') opt = 1;
 	else if (s1[0] == '-' && s2[0] != '-') opt = 2;
 	else if (s1[0] != '-' && s2[0] == '-') opt = 3;
 	else opt = 4;
 
-	for (int i = len_X - 1; i >= 0; i--)
+	if (s1[0] == '-')
 	{
-		s1[41 - flag] = s1[i];
-		if(len_X != 41) s1[i] = 0;
+		s1[0] = 0;
+	}
+
+	for (int i = len_X - 1; i >= 0; i--) //len_X 전부를 옮기기.
+	{
+		s1[41 - flag] = s1[i]; //배열 통째로 옮기기(부호 포함), 맨 뒤는 무조건 null문자.
+		s1[i] = 0;
 		flag++;
 	}
 
-	if (s1[41 - len_X] == '-')
-	{
-		s1[41 - len_X] = 0;
-	}
+	flag = 0;
 
-	flag = 1;
+	if (s2[0] == '-')
+	{
+		s2[0] = 0;
+	}
 
 	for (int i = len_Y - 1; i >= 0; i--)
 	{
 		s2[41 - flag] = s2[i];
-		if (len_Y != 41) s2[i] = 0;
+		s2[i] = 0;
 		flag++;
-	}
-
-	if (s2[41 - len_Y] == '-')
-	{
-		s2[41 - len_Y] = 0;
 	}
 
 	return opt;
@@ -361,7 +371,7 @@ int arrange(char *s1, char *s2, int len_X, int len_Y) //부호 얻기(절댓값 만들어�
 
 void make_integer(char *X, char *Y)
 {
-	for (int i = 0; i < 41; i++)
+	for (int i = 0; i < 42; i++)
 	{
 		if (X[i] != 0)
 			X[i] -= '0';
@@ -372,7 +382,7 @@ void make_integer(char *X, char *Y)
 
 int isBig(char *X, char *Y)
 {
-	for (int i = 0; i < 41; i++)
+	for (int i = 0; i < 42; i++)
 	{
 		if (X[i] < Y[i])
 		{
@@ -390,7 +400,7 @@ int isBig(char *X, char *Y)
 void swap(char *X, char *Y)
 {
 	int temp;
-	for (int i = 0; i < 41; i++)
+	for (int i = 0; i < 42; i++)
 	{
 		temp = X[i];
 		X[i] = Y[i];
