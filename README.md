@@ -2,7 +2,6 @@
 Conducting a study on how to save information in minimum space in C for Class : *CAU-2019-2 Programming*
 
 ## Notice
-- Compiled in Visual Studio 2019
 - **DO NOT COPY**
 
 ## Contents
